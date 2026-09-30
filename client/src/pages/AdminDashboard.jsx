@@ -18,7 +18,7 @@ export default function AdminDashboard() {
 
         <section style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20, marginBottom: 20 }}>
           <div style={{ background: '#fff', borderRadius: 12, padding: 24, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-            <h3 style={{ margin: 0 0 16 0 }}>Audience</h3>
+            <h3 style={{ margin: '0 0 16px 0' }}>Audience</h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 12, marginBottom: 16 }}>
               {[['Users','15,125'],['Bounce Rate','25.50%'],['Page Views','75,951'],['Sessions','14,125']].map(([t,v]) => (
                 <div key={t} style={{ background: '#fafafa', padding: 12, borderRadius: 8 }}>
@@ -41,7 +41,7 @@ export default function AdminDashboard() {
 
         <section style={{ display: 'grid', gridTemplateColumns: '2fr 1fr', gap: 20, marginBottom: 20 }}>
           <div style={{ background: '#fff', borderRadius: 12, padding: 24, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-            <h3 style={{ margin: 0 0 16 0 }}>Our Visitors</h3>
+            <h3 style={{ margin: '0 0 16px 0' }}>Our Visitors</h3>
             <div style={{ height: 180, background: '#f8f9fa', borderRadius: 8, display: 'flex', alignItems: 'flex-end', padding: '16px 16px 0', gap: 6 }}>
               {[40, 60, 90, 50, 70, 40, 80, 45, 55, 30, 65, 35].map((h, i) => (
                 <div key={i} style={{ flex: 1, background: i % 2 ? '#4caf50' : '#ccc', height: h + '%', borderRadius: 4, opacity: 0.9 }} />
@@ -57,7 +57,7 @@ export default function AdminDashboard() {
             </div>
           </div>
           <div style={{ background: '#fff', borderRadius: 12, padding: 24, boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
-            <h3 style={{ margin: 0 0 16 0 }}>Latest Customers</h3>
+            <h3 style={{ margin: '0 0 16px 0' }}>Latest Customers</h3>
             <table style={{ width: '100%', fontSize: 13, borderCollapse: 'collapse' }}>
               <thead><tr style={{ background: '#3498db', color: '#fff', textAlign: 'left' }}><th style={{ padding: 8 }}>#</th><th>PHOTO</th><th>NAME</th><th>ORDERS</th><th>VIEW</th></tr></thead>
               <tbody>
