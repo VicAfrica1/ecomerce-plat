@@ -48,6 +48,46 @@ body {
   margin-bottom: 2rem;
 }
 
+.profile-avatar-wrapper {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-avatar-img {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--primary);
+}
+
+.profile-avatar-edit {
+  position: absolute;
+  bottom: 0.25rem;
+  right: 0.25rem;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  font-size: 0.85rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+}
+
+.profile-avatar-edit:hover {
+  background: var(--primary-hover);
+}
+
+.profile-avatar-edit:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
 .profile-avatar {
   width: 4rem;
   height: 4rem;

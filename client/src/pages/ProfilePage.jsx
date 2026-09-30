@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext.jsx";
 
@@ -17,8 +17,9 @@ function formatRole(role) {
 }
 
 export default function ProfilePage() {
-  const { user, updateProfile, logout } = useAuth();
+  const { user, updateProfile, logout, uploadAvatar } = useAuth();
   const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
   const [name, setName] = useState(user?.name ?? "");
   const [email, setEmail] = useState(user?.email ?? "");
@@ -26,6 +27,8 @@ export default function ProfilePage() {
   const [banner, setBanner] = useState("");
   const [pending, setPending] = useState(false);
   const [editing, setEditing] = useState(false);
+  const [avatarPending, setAvatarPending] = useState(false);
+  const [previewUrl, setPreviewUrl] = useState("");
 
   async function handleLogout() {
     await logout();
@@ -55,11 +58,59 @@ export default function ProfilePage() {
     }
   }
 
+  async function handleAvatarClick() {
+    fileInputRef.current?.click();
+  }
+
+  async function handleAvatarChange(e) {
+    const file = e.target.files?.[0];
+    if (!file) return;
+    setAvatarPending(true);
+    setBanner("");
+    setPreviewUrl(URL.createObjectURL(file));
+    try {
+      await uploadAvatar(file);
+    } catch (err) {
+      setBanner(err.message || "Avatar upload failed");
+    } finally {
+      setAvatarPending(false);
+      e.target.value = "";
+    }
+  }
+
   return (
     <main className="profile-page">
       <div className="profile-card">
         <div className="profile-header">
-          <div className="profile-avatar">{getInitials(user.name)}</div>
+          <div className="profile-avatar-wrapper">
+            {(user.avatar || previewUrl) ? (
+              <img
+                src={previewUrl || (user.avatar?.startsWith("http") ? user.avatar : (user.avatar ? (import.meta.env.VITE_API_URL || "http://localhost:5001/api").replace("/api", "") + user.avatar : ""))}
+                alt="Avatar"
+                className="profile-avatar-img"
+                onClick={editing ? handleAvatarClick : undefined}
+                style={editing ? { cursor: "pointer" } : {}}
+              />
+            ) : (
+              <div className="profile-avatar">{getInitials(user.name)}</div>
+            )}
+            <button
+              type="button"
+              className="profile-avatar-edit"
+              onClick={handleAvatarClick}
+              disabled={avatarPending || !editing}
+              title={editing ? "Click to upload avatar" : "Edit profile to change avatar"}
+            >
+              {avatarPending ? "…" : "✎"}
+            </button>
+            <input
+              ref={fileInputRef}
+              type="file"
+              accept="image/*"
+              onChange={handleAvatarChange}
+              style={{ display: "none" }}
+            />
+          </div>
           <div className="profile-header-info">
             <h1 className="profile-name">{user.name}</h1>
             <span className="profile-role">{formatRole(user.role)}</span>

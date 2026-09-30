@@ -1,4 +1,6 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import healthRoutes from "./routes/health.routes.js";
@@ -21,6 +23,10 @@ app.use(
 
 app.use(express.json());
 app.use(cookieParser());
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 // Routes
 app.use("/api/health", healthRoutes);

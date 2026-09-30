@@ -20,6 +20,26 @@ async function request(path, options = {}) {
   return body;
 }
 
+async function uploadRequest(path, formData) {
+  const res = await fetch(`${BASE_URL}${path}`, {
+    credentials: "include",
+    method: "POST",
+    body: formData,
+  });
+
+  const body = await res.json().catch(() => ({}));
+
+  if (!res.ok) {
+    const error = new Error(
+      body.message || body.errors?.[0]?.message || "Upload failed"
+    );
+    error.status = res.status;
+    error.errors = body.errors;
+    throw error;
+  }
+  return body;
+}
+
 export const authApi = {
   register: (data) =>
     request("/auth/register", { method: "POST", body: JSON.stringify(data) }),
@@ -29,6 +49,11 @@ export const authApi = {
   me: () => request("/auth/me"),
   updateProfile: (data) =>
     request("/auth/me", { method: "PUT", body: JSON.stringify(data) }),
+  uploadAvatar: (file) => {
+    const formData = new FormData();
+    formData.append("avatar", file);
+    return uploadRequest("/auth/avatar", formData);
+  },
 };
 
 export default request;

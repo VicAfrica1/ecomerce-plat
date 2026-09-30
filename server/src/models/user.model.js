@@ -28,6 +28,11 @@ const userSchema = new mongoose.Schema(
       enum: ["customer", "admin"],
       default: "customer",
     },
+    avatar: {
+      type: String,
+      trim: true,
+      maxlength: [500, "Avatar URL is too long"],
+    },
   },
   { timestamps: true }
 );

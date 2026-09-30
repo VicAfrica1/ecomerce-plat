@@ -42,6 +42,7 @@ function sanitizeUser(user) {
     name: user.name,
     email: user.email,
     role: user.role,
+    avatar: user.avatar || null,
   };
 }
 
@@ -118,6 +119,15 @@ export async function updateProfile(userId, { name = "", email = "" } = {}) {
     user.email = normalizedEmail;
   }
 
+  await user.save();
+  return sanitizeUser(user);
+}
+
+export async function updateAvatar(userId, avatarUrl) {
+  const user = await User.findById(userId);
+  if (!user) throw authError("Not authenticated", 401);
+
+  user.avatar = avatarUrl || null;
   await user.save();
   return sanitizeUser(user);
 }

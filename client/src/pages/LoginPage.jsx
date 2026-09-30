@@ -17,8 +17,8 @@ export default function LoginPage() {
     setBanner("");
     setPending(true);
     try {
-      await login(email, password);
-      navigate("/profile");
+      const user = await login(email, password);
+      navigate(user?.role === "admin" ? "/admin" : "/profile");
     } catch (err) {
       if (err.errors) {
         const byField = {};

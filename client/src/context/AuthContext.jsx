@@ -41,6 +41,12 @@ export function AuthProvider({ children }) {
     return user;
   }, []);
 
+  const uploadAvatar = useCallback(async (file) => {
+    const { user } = await authApi.uploadAvatar(file);
+    setUser(user);
+    return user;
+  }, []);
+
   const logout = useCallback(async () => {
     // Even if the call fails locally, drop the session state.
     await authApi.logout().catch(() => {});
@@ -48,7 +54,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, register, updateProfile, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, register, updateProfile, logout, uploadAvatar }}>
       {children}
     </AuthContext.Provider>
   );
