@@ -22,19 +22,20 @@ export default function ElectronicsPage() {
         <h1 style={{ fontWeight: 800, fontSize: '2rem', marginBottom: 8 }}>Electronics</h1>
         <p style={{ color: '#6b7280', marginBottom: 20 }}>Browse our latest gadgets, phones, laptops, and smart devices.</p>
 
-        <img src="/electronics-preview.png" alt="Electronics" style={{ width: '100%', borderRadius: 12, boxShadow: '0 10px 30px rgba(0,0,0,.1)', cursor: 'pointer' }} onClick={() => navigate("/")} />
+        <img src="/product-page.png" alt="Products" style={{ width: '100%', borderRadius: 12, boxShadow: '0 10px 30px rgba(0,0,0,.1)', cursor: 'pointer' }} onClick={() => navigate("/")} />
 
         {/* Interactive product cards */}
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '1rem', marginTop: 32 }}>
           {[
-            { name: 'Dior Sauvage EDP', price: '$199', img: '/smartwatch-preview.png' },
-            { name: 'Samsung Galaxy Z Fold8', price: '$129', img: '/samsung-zfold-preview.png' },
-            { name: 'Doctor Martens Boot', price: '$89', img: '/shoes-preview.png' },
-            { name: 'NIB Adidas F50 Messi', price: '$149', img: '/handbag-new-preview.png' },
+            { name: 'Dior Sauvage EDP', price: '$199', desc: 'Bold woody fragrance with amber and vanilla notes.', img: '/smartwatch-preview.png' },
+            { name: 'Samsung Galaxy Z Fold8', price: '$129', desc: 'Foldable flagship with 7.6" display and S Pen support.', img: '/samsung-zfold-preview.png' },
+            { name: 'Doctor Martens Boot', price: '$89', desc: 'Classic leather ankle boots with air-cushioned soles.', img: '/shoes-preview.png' },
+            { name: 'NIB Adidas F50 Messi', price: '$149', desc: 'Performance soccer cleats inspired by Lionel Messi.', img: '/handbag-new-preview.png' },
           ].map(p => (
             <button key={p.name} onClick={() => navigate("/")} style={{ background: '#fff', border: '1px solid #e5e7eb', borderRadius: 12, padding: 12, textAlign: 'left', cursor: 'pointer', fontFamily: 'inherit' }}>
               <img src={p.img} alt={p.name} style={{ width: '100%', borderRadius: 8, height: 160, objectFit: 'cover', marginBottom: 10, pointerEvents: 'none' }} />
               <h4 style={{ fontWeight: 700, fontSize: '1rem', marginBottom: 4 }}>{p.name}</h4>
+              <p style={{ fontSize: '0.8rem', color: '#6b7280', marginBottom: 6 }}>{p.desc}</p>
               <span style={{ fontWeight: 600, color: '#1a1a2e' }}>{p.price}</span>
             </button>
           ))}

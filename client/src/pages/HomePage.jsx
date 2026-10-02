@@ -29,18 +29,6 @@ export default function HomePage() {
         </div>
       </header>
 
-      {/* Settings icon top-left */}
-      <div style={{ position: 'absolute', top: 70, left: 20, zIndex: 10 }}>
-        <button onClick={() => setOpen(!open)} style={{ background: '#1a1a2e', color: '#fff', border: 'none', borderRadius: '50%', width: 36, height: 36, fontSize: 18, cursor: 'pointer' }} title="Settings">⚙</button>
-        {open && (
-          <div style={{ position: 'absolute', top: 40, left: 0, background: '#fff', border: '1px solid #e5e7eb', borderRadius: 8, boxShadow: '0 4px 6px rgba(0,0,0,.1)', minWidth: 180, padding: '0.5rem 0' }}>
-            {["Edit Profile", "Edit Theme", "Edit Password", "Edit Address", "Edit Phone Number", "Log out"].map((item) => (
-              <button key={item} onClick={() => { setOpen(false); if (item === "Log out") handleLogout(); else navigate("/profile"); }} style={{ display: 'block', width: '100%', textAlign: 'left', padding: '0.5rem 1rem', background: 'none', border: 'none', cursor: 'pointer', fontSize: '0.875rem', color: '#1f2937' }}>{item}</button>
-            ))}
-          </div>
-        )}
-      </div>
-
       <main style={{ maxWidth: 1200, margin: '0 auto', padding: '1rem 2rem' }}>
         {/* Hero Banner */}
         <section style={{ background: 'linear-gradient(to right, #1a1a2e, #4a5568)', color: '#fff', borderRadius: 16, padding: '3rem 2rem', display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: 24 }}>
@@ -59,13 +47,13 @@ export default function HomePage() {
           <h3 style={{ fontSize: '1.25rem', fontWeight: 700, marginBottom: 12 }}>Browse By Category</h3>
           <div style={{ display: 'grid', gridTemplateColumns: 'repeat(7, 1fr)', gap: '0.75rem' }}>
             {[
-              { name: 'Fashion', icon: '👗' },
+              { name: 'Fashion', icon: '👗', onClick: () => navigate('/') },
               { name: 'Electronics', icon: '📱', onClick: () => navigate('/electronics') },
-              { name: 'Home', icon: '🏠' },
-              { name: 'Beauty', icon: '✨' },
-              { name: 'Sports', icon: '⚽' },
-              { name: 'Toys', icon: '🧸' },
-              { name: 'Books', icon: '📚' },
+              { name: 'Home', icon: '🏠', onClick: () => navigate('/') },
+              { name: 'Beauty', icon: '✨', onClick: () => navigate('/') },
+              { name: 'Sports', icon: '⚽', onClick: () => navigate('/') },
+              { name: 'Toys', icon: '🧸', onClick: () => navigate('/') },
+              { name: 'Books', icon: '📚', onClick: () => navigate('/') },
             ].map(c => (
               <a key={c.name} href="#" onClick={(e) => { if (c.onClick) { e.preventDefault(); c.onClick(); } }} style={{ background: '#fff', borderRadius: 12, padding: '1rem', textAlign: 'center', textDecoration: 'none', color: '#1f2937', boxShadow: '0 1px 3px rgba(0,0,0,.08)', fontWeight: 600, fontSize: '0.875rem', transition: 'transform .1s' }} onMouseEnter={e => e.currentTarget.style.transform='translateY(-3px)'} onMouseLeave={e => e.currentTarget.style.transform='none'}>
                 <div style={{ fontSize: '2rem', marginBottom: 4 }}>{c.icon}</div>
@@ -77,6 +65,7 @@ export default function HomePage() {
 
         {/* Trending Right Now */}
         <section id="products" style={{ marginBottom: 32 }}>
+          <img src="/products-section.png" alt="Products" style={{ width: '100%', borderRadius: 12, marginBottom: 16 }} />
           <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
             <h3 style={{ fontSize: '1.25rem', fontWeight: 700 }}>Trending Right Now</h3>
             <a href="#" style={{ fontSize: '0.875rem', color: '#2563eb', textDecoration: 'none' }}>See All →</a>
@@ -88,7 +77,7 @@ export default function HomePage() {
               { name: 'Original Dr. Martens Premium Leather Double Sole Boots, Casual High Quality High Cut Unisex Shoes | Toppline Kenya', price: '$89', img: '/shoes-preview.png' },
               { name: 'NIB Men\'s Adidas F50 Messi 2026 Elite Firm Ground Soccer IH1892 Cleats Icey Blue', price: '$149', img: '/handbag-new-preview.png' },
             ].map(p => (
-              <a key={p.name} href="#" style={{ background: '#fff', borderRadius: 12, padding: 12, textDecoration: 'none', color: '#1f2937', boxShadow: '0 1px 3px rgba(0,0,0,.08)' }}>
+              <a key={p.name} href="#" onClick={e => { e.preventDefault(); navigate('/'); }} style={{ background: '#fff', borderRadius: 12, padding: 12, textDecoration: 'none', color: '#1f2937', boxShadow: '0 1px 3px rgba(0,0,0,.08)' }}>
                 <img src={p.img} alt={p.name} style={{ width: '100%', borderRadius: 8, height: 160, objectFit: 'cover', marginBottom: 10 }} />
                 <h4 style={{ fontWeight: 700, fontSize: '1rem', marginBottom: 4 }}>{p.name}</h4>
                 <span style={{ fontWeight: 600, color: '#1a1a2e' }}>{p.price}</span>
