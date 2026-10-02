@@ -18,7 +18,7 @@ export default function LoginPage() {
     setPending(true);
     try {
       const user = await login(email, password);
-      navigate(user?.role === "admin" ? "/admin" : "/profile");
+      navigate(user?.role === "admin" ? "/admin" : "/electronics");
     } catch (err) {
       if (err.errors) {
         const byField = {};

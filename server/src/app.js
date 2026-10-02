@@ -5,6 +5,7 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 import healthRoutes from "./routes/health.routes.js";
 import authRoutes from "./routes/auth.routes.js";
+import productRoutes from "./routes/products.js";
 import {
   notFoundHandler,
   errorHandler,
@@ -30,6 +31,7 @@ app.use("/uploads", express.static(path.join(__dirname, "..", "uploads")));
 
 // Routes
 app.use("/api/health", healthRoutes);
+app.use("/api/products", productRoutes);
 app.use("/api/auth", authRoutes);
 
 // 404 + error handling must run after all routes
